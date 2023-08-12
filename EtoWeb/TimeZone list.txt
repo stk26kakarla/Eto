@@ -1,0 +1,1048 @@
+DisplayName: (UTC-12:00) International Date Line West
+DaylightName: Dateline Daylight Time
+StandardName: Dateline Standard Time
+Id: Dateline Standard Time
+Date Time: 13-08-2016 14:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-11:00) Coordinated Universal Time-11
+DaylightName: UTC-11
+StandardName: UTC-11
+Id: UTC-11
+Date Time: 13-08-2016 15:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-10:00) Aleutian Islands
+DaylightName: Aleutian Daylight Time
+StandardName: Aleutian Standard Time
+Id: Aleutian Standard Time
+Date Time: 13-08-2016 17:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-10:00) Hawaii
+DaylightName: Hawaiian Daylight Time
+StandardName: Hawaiian Standard Time
+Id: Hawaiian Standard Time
+Date Time: 13-08-2016 16:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-09:30) Marquesas Islands
+DaylightName: Marquesas Daylight Time
+StandardName: Marquesas Standard Time
+Id: Marquesas Standard Time
+Date Time: 13-08-2016 16:47:46
+
+---------------------------------------------
+
+DisplayName: (UTC-09:00) Alaska
+DaylightName: Alaskan Daylight Time
+StandardName: Alaskan Standard Time
+Id: Alaskan Standard Time
+Date Time: 13-08-2016 18:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-09:00) Coordinated Universal Time-09
+DaylightName: UTC-09
+StandardName: UTC-09
+Id: UTC-09
+Date Time: 13-08-2016 17:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-08:00) Baja California
+DaylightName: Pacific Daylight Time (Mexico)
+StandardName: Pacific Standard Time (Mexico)
+Id: Pacific Standard Time (Mexico)
+Date Time: 13-08-2016 19:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-08:00) Coordinated Universal Time-08
+DaylightName: UTC-08
+StandardName: UTC-08
+Id: UTC-08
+Date Time: 13-08-2016 18:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-08:00) Pacific Time (US & Canada)
+DaylightName: Pacific Daylight Time
+StandardName: Pacific Standard Time
+Id: Pacific Standard Time
+Date Time: 13-08-2016 19:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-07:00) Arizona
+DaylightName: US Mountain Daylight Time
+StandardName: US Mountain Standard Time
+Id: US Mountain Standard Time
+Date Time: 13-08-2016 19:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-07:00) Chihuahua, La Paz, Mazatlan
+DaylightName: Mountain Daylight Time (Mexico)
+StandardName: Mountain Standard Time (Mexico)
+Id: Mountain Standard Time (Mexico)
+Date Time: 13-08-2016 20:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-07:00) Mountain Time (US & Canada)
+DaylightName: Mountain Daylight Time
+StandardName: Mountain Standard Time
+Id: Mountain Standard Time
+Date Time: 13-08-2016 20:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-06:00) Central America
+DaylightName: Central America Daylight Time
+StandardName: Central America Standard Time
+Id: Central America Standard Time
+Date Time: 13-08-2016 20:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-06:00) Central Time (US & Canada)
+DaylightName: Central Daylight Time
+StandardName: Central Standard Time
+Id: Central Standard Time
+Date Time: 13-08-2016 21:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-06:00) Easter Island
+DaylightName: Easter Island Daylight Time
+StandardName: Easter Island Standard Time
+Id: Easter Island Standard Time
+Date Time: 13-08-2016 20:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-06:00) Guadalajara, Mexico City, Monterrey
+DaylightName: Central Daylight Time (Mexico)
+StandardName: Central Standard Time (Mexico)
+Id: Central Standard Time (Mexico)
+Date Time: 13-08-2016 21:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-06:00) Saskatchewan
+DaylightName: Canada Central Daylight Time
+StandardName: Canada Central Standard Time
+Id: Canada Central Standard Time
+Date Time: 13-08-2016 20:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-05:00) Bogota, Lima, Quito, Rio Branco
+DaylightName: SA Pacific Daylight Time
+StandardName: SA Pacific Standard Time
+Id: SA Pacific Standard Time
+Date Time: 13-08-2016 21:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-05:00) Chetumal
+DaylightName: Eastern Daylight Time (Mexico)
+StandardName: Eastern Standard Time (Mexico)
+Id: Eastern Standard Time (Mexico)
+Date Time: 13-08-2016 21:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-05:00) Eastern Time (US & Canada)
+DaylightName: Eastern Daylight Time
+StandardName: Eastern Standard Time
+Id: Eastern Standard Time
+Date Time: 13-08-2016 22:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-05:00) Haiti
+DaylightName: Haiti Daylight Time
+StandardName: Haiti Standard Time
+Id: Haiti Standard Time
+Date Time: 13-08-2016 21:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-05:00) Havana
+DaylightName: Cuba Daylight Time
+StandardName: Cuba Standard Time
+Id: Cuba Standard Time
+Date Time: 13-08-2016 22:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-05:00) Indiana (East)
+DaylightName: US Eastern Daylight Time
+StandardName: US Eastern Standard Time
+Id: US Eastern Standard Time
+Date Time: 13-08-2016 22:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-04:00) Asuncion
+DaylightName: Paraguay Daylight Time
+StandardName: Paraguay Standard Time
+Id: Paraguay Standard Time
+Date Time: 13-08-2016 22:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-04:00) Atlantic Time (Canada)
+DaylightName: Atlantic Daylight Time
+StandardName: Atlantic Standard Time
+Id: Atlantic Standard Time
+Date Time: 13-08-2016 23:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-04:00) Caracas
+DaylightName: Venezuela Daylight Time
+StandardName: Venezuela Standard Time
+Id: Venezuela Standard Time
+Date Time: 13-08-2016 22:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-04:00) Cuiaba
+DaylightName: Central Brazilian Daylight Time
+StandardName: Central Brazilian Standard Time
+Id: Central Brazilian Standard Time
+Date Time: 13-08-2016 22:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-04:00) Georgetown, La Paz, Manaus, San Juan
+DaylightName: SA Western Daylight Time
+StandardName: SA Western Standard Time
+Id: SA Western Standard Time
+Date Time: 13-08-2016 22:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-04:00) Santiago
+DaylightName: Pacific SA Daylight Time
+StandardName: Pacific SA Standard Time
+Id: Pacific SA Standard Time
+Date Time: 13-08-2016 22:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-04:00) Turks and Caicos
+DaylightName: Turks and Caicos Daylight Time
+StandardName: Turks and Caicos Standard Time
+Id: Turks And Caicos Standard Time
+Date Time: 13-08-2016 22:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-03:30) Newfoundland
+DaylightName: Newfoundland Daylight Time
+StandardName: Newfoundland Standard Time
+Id: Newfoundland Standard Time
+Date Time: 13-08-2016 23:47:46
+
+---------------------------------------------
+
+DisplayName: (UTC-03:00) Araguaina
+DaylightName: Tocantins Daylight Time
+StandardName: Tocantins Standard Time
+Id: Tocantins Standard Time
+Date Time: 13-08-2016 23:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-03:00) Brasilia
+DaylightName: E. South America Daylight Time
+StandardName: E. South America Standard Time
+Id: E. South America Standard Time
+Date Time: 13-08-2016 23:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-03:00) Cayenne, Fortaleza
+DaylightName: SA Eastern Daylight Time
+StandardName: SA Eastern Standard Time
+Id: SA Eastern Standard Time
+Date Time: 13-08-2016 23:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-03:00) City of Buenos Aires
+DaylightName: Argentina Daylight Time
+StandardName: Argentina Standard Time
+Id: Argentina Standard Time
+Date Time: 13-08-2016 23:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-03:00) Greenland
+DaylightName: Greenland Daylight Time
+StandardName: Greenland Standard Time
+Id: Greenland Standard Time
+Date Time: 14-08-2016 00:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-03:00) Montevideo
+DaylightName: Montevideo Daylight Time
+StandardName: Montevideo Standard Time
+Id: Montevideo Standard Time
+Date Time: 13-08-2016 23:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-03:00) Saint Pierre and Miquelon
+DaylightName: Saint Pierre Daylight Time
+StandardName: Saint Pierre Standard Time
+Id: Saint Pierre Standard Time
+Date Time: 14-08-2016 00:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-03:00) Salvador
+DaylightName: Bahia Daylight Time
+StandardName: Bahia Standard Time
+Id: Bahia Standard Time
+Date Time: 13-08-2016 23:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-02:00) Coordinated Universal Time-02
+DaylightName: UTC-02
+StandardName: UTC-02
+Id: UTC-02
+Date Time: 14-08-2016 00:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-02:00) Mid-Atlantic - Old
+DaylightName: Mid-Atlantic Daylight Time
+StandardName: Mid-Atlantic Standard Time
+Id: Mid-Atlantic Standard Time
+Date Time: 14-08-2016 01:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-01:00) Azores
+DaylightName: Azores Daylight Time
+StandardName: Azores Standard Time
+Id: Azores Standard Time
+Date Time: 14-08-2016 02:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC-01:00) Cabo Verde Is.
+DaylightName: Cabo Verde Daylight Time
+StandardName: Cabo Verde Standard Time
+Id: Cape Verde Standard Time
+Date Time: 14-08-2016 01:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC) Coordinated Universal Time
+DaylightName: Coordinated Universal Time
+StandardName: Coordinated Universal Time
+Id: UTC
+Date Time: 14-08-2016 02:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+00:00) Casablanca
+DaylightName: Morocco Daylight Time
+StandardName: Morocco Standard Time
+Id: Morocco Standard Time
+Date Time: 14-08-2016 03:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+00:00) Dublin, Edinburgh, Lisbon, London
+DaylightName: GMT Daylight Time
+StandardName: GMT Standard Time
+Id: GMT Standard Time
+Date Time: 14-08-2016 03:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+00:00) Monrovia, Reykjavik
+DaylightName: Greenwich Daylight Time
+StandardName: Greenwich Standard Time
+Id: Greenwich Standard Time
+Date Time: 14-08-2016 02:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna
+DaylightName: W. Europe Daylight Time
+StandardName: W. Europe Standard Time
+Id: W. Europe Standard Time
+Date Time: 14-08-2016 04:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague
+DaylightName: Central Europe Daylight Time
+StandardName: Central Europe Standard Time
+Id: Central Europe Standard Time
+Date Time: 14-08-2016 04:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+01:00) Brussels, Copenhagen, Madrid, Paris
+DaylightName: Romance Daylight Time
+StandardName: Romance Standard Time
+Id: Romance Standard Time
+Date Time: 14-08-2016 04:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb
+DaylightName: Central European Daylight Time
+StandardName: Central European Standard Time
+Id: Central European Standard Time
+Date Time: 14-08-2016 04:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+01:00) West Central Africa
+DaylightName: W. Central Africa Daylight Time
+StandardName: W. Central Africa Standard Time
+Id: W. Central Africa Standard Time
+Date Time: 14-08-2016 03:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+01:00) Windhoek
+DaylightName: Namibia Daylight Time
+StandardName: Namibia Standard Time
+Id: Namibia Standard Time
+Date Time: 14-08-2016 03:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Amman
+DaylightName: Jordan Daylight Time
+StandardName: Jordan Standard Time
+Id: Jordan Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Athens, Bucharest
+DaylightName: GTB Daylight Time
+StandardName: GTB Standard Time
+Id: GTB Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Beirut
+DaylightName: Middle East Daylight Time
+StandardName: Middle East Standard Time
+Id: Middle East Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Cairo
+DaylightName: Egypt Daylight Time
+StandardName: Egypt Standard Time
+Id: Egypt Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Chisinau
+DaylightName: E. Europe Daylight Time
+StandardName: E. Europe Standard Time
+Id: E. Europe Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Damascus
+DaylightName: Syria Daylight Time
+StandardName: Syria Standard Time
+Id: Syria Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Gaza, Hebron
+DaylightName: West Bank Gaza Daylight Time
+StandardName: West Bank Gaza Standard Time
+Id: West Bank Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Harare, Pretoria
+DaylightName: South Africa Daylight Time
+StandardName: South Africa Standard Time
+Id: South Africa Standard Time
+Date Time: 14-08-2016 04:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius
+DaylightName: FLE Daylight Time
+StandardName: FLE Standard Time
+Id: FLE Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Istanbul
+DaylightName: Turkey Daylight Time
+StandardName: Turkey Standard Time
+Id: Turkey Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Jerusalem
+DaylightName: Jerusalem Daylight Time
+StandardName: Jerusalem Standard Time
+Id: Israel Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Kaliningrad
+DaylightName: Russia TZ 1 Daylight Time
+StandardName: Russia TZ 1 Standard Time
+Id: Kaliningrad Standard Time
+Date Time: 14-08-2016 04:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+02:00) Tripoli
+DaylightName: Libya Daylight Time
+StandardName: Libya Standard Time
+Id: Libya Standard Time
+Date Time: 14-08-2016 04:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+03:00) Baghdad
+DaylightName: Arabic Daylight Time
+StandardName: Arabic Standard Time
+Id: Arabic Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+03:00) Kuwait, Riyadh
+DaylightName: Arab Daylight Time
+StandardName: Arab Standard Time
+Id: Arab Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+03:00) Minsk
+DaylightName: Belarus Daylight Time
+StandardName: Belarus Standard Time
+Id: Belarus Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+03:00) Moscow, St. Petersburg, Volgograd
+DaylightName: Russia TZ 2 Daylight Time
+StandardName: Russia TZ 2 Standard Time
+Id: Russian Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+03:00) Nairobi
+DaylightName: E. Africa Daylight Time
+StandardName: E. Africa Standard Time
+Id: E. Africa Standard Time
+Date Time: 14-08-2016 05:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+03:30) Tehran
+DaylightName: Iran Daylight Time
+StandardName: Iran Standard Time
+Id: Iran Standard Time
+Date Time: 14-08-2016 06:47:46
+
+---------------------------------------------
+
+DisplayName: (UTC+04:00) Abu Dhabi, Muscat
+DaylightName: Arabian Daylight Time
+StandardName: Arabian Standard Time
+Id: Arabian Standard Time
+Date Time: 14-08-2016 06:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+04:00) Astrakhan, Ulyanovsk
+DaylightName: Astrakhan Daylight Time
+StandardName: Astrakhan Standard Time
+Id: Astrakhan Standard Time
+Date Time: 14-08-2016 06:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+04:00) Baku
+DaylightName: Azerbaijan Daylight Time
+StandardName: Azerbaijan Standard Time
+Id: Azerbaijan Standard Time
+Date Time: 14-08-2016 06:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+04:00) Izhevsk, Samara
+DaylightName: Russia TZ 3 Daylight Time
+StandardName: Russia TZ 3 Standard Time
+Id: Russia Time Zone 3
+Date Time: 14-08-2016 06:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+04:00) Port Louis
+DaylightName: Mauritius Daylight Time
+StandardName: Mauritius Standard Time
+Id: Mauritius Standard Time
+Date Time: 14-08-2016 06:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+04:00) Tbilisi
+DaylightName: Georgian Daylight Time
+StandardName: Georgian Standard Time
+Id: Georgian Standard Time
+Date Time: 14-08-2016 06:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+04:00) Yerevan
+DaylightName: Caucasus Daylight Time
+StandardName: Caucasus Standard Time
+Id: Caucasus Standard Time
+Date Time: 14-08-2016 06:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+04:30) Kabul
+DaylightName: Afghanistan Daylight Time
+StandardName: Afghanistan Standard Time
+Id: Afghanistan Standard Time
+Date Time: 14-08-2016 06:47:46
+
+---------------------------------------------
+
+DisplayName: (UTC+05:00) Ashgabat, Tashkent
+DaylightName: West Asia Daylight Time
+StandardName: West Asia Standard Time
+Id: West Asia Standard Time
+Date Time: 14-08-2016 07:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+05:00) Ekaterinburg
+DaylightName: Russia TZ 4 Daylight Time
+StandardName: Russia TZ 4 Standard Time
+Id: Ekaterinburg Standard Time
+Date Time: 14-08-2016 07:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+05:00) Islamabad, Karachi
+DaylightName: Pakistan Daylight Time
+StandardName: Pakistan Standard Time
+Id: Pakistan Standard Time
+Date Time: 14-08-2016 07:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi
+DaylightName: India Daylight Time
+StandardName: India Standard Time
+Id: India Standard Time
+Date Time: 14-08-2016 07:47:46
+
+---------------------------------------------
+
+DisplayName: (UTC+05:30) Sri Jayawardenepura
+DaylightName: Sri Lanka Daylight Time
+StandardName: Sri Lanka Standard Time
+Id: Sri Lanka Standard Time
+Date Time: 14-08-2016 07:47:46
+
+---------------------------------------------
+
+DisplayName: (UTC+05:45) Kathmandu
+DaylightName: Nepal Daylight Time
+StandardName: Nepal Standard Time
+Id: Nepal Standard Time
+Date Time: 14-08-2016 08:02:46
+
+---------------------------------------------
+
+DisplayName: (UTC+06:00) Astana
+DaylightName: Central Asia Daylight Time
+StandardName: Central Asia Standard Time
+Id: Central Asia Standard Time
+Date Time: 14-08-2016 08:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+06:00) Dhaka
+DaylightName: Bangladesh Daylight Time
+StandardName: Bangladesh Standard Time
+Id: Bangladesh Standard Time
+Date Time: 14-08-2016 08:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+06:00) Novosibirsk
+DaylightName: Russia TZ 5 Daylight Time
+StandardName: Russia TZ 5 Standard Time
+Id: N. Central Asia Standard Time
+Date Time: 14-08-2016 08:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+06:30) Yangon (Rangoon)
+DaylightName: Myanmar Daylight Time
+StandardName: Myanmar Standard Time
+Id: Myanmar Standard Time
+Date Time: 14-08-2016 08:47:46
+
+---------------------------------------------
+
+DisplayName: (UTC+07:00) Bangkok, Hanoi, Jakarta
+DaylightName: SE Asia Daylight Time
+StandardName: SE Asia Standard Time
+Id: SE Asia Standard Time
+Date Time: 14-08-2016 09:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+07:00) Barnaul, Gorno-Altaysk
+DaylightName: Altai Daylight Time
+StandardName: Altai Standard Time
+Id: Altai Standard Time
+Date Time: 14-08-2016 09:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+07:00) Hovd
+DaylightName: W. Mongolia Daylight Time
+StandardName: W. Mongolia Standard Time
+Id: W. Mongolia Standard Time
+Date Time: 14-08-2016 10:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+07:00) Krasnoyarsk
+DaylightName: Russia TZ 6 Daylight Time
+StandardName: Russia TZ 6 Standard Time
+Id: North Asia Standard Time
+Date Time: 14-08-2016 09:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+07:00) Tomsk
+DaylightName: Tomsk Daylight Time
+StandardName: Tomsk Standard Time
+Id: Tomsk Standard Time
+Date Time: 14-08-2016 09:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi
+DaylightName: China Daylight Time
+StandardName: China Standard Time
+Id: China Standard Time
+Date Time: 14-08-2016 10:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+08:00) Irkutsk
+DaylightName: Russia TZ 7 Daylight Time
+StandardName: Russia TZ 7 Standard Time
+Id: North Asia East Standard Time
+Date Time: 14-08-2016 10:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+08:00) Kuala Lumpur, Singapore
+DaylightName: Malay Peninsula Daylight Time
+StandardName: Malay Peninsula Standard Time
+Id: Singapore Standard Time
+Date Time: 14-08-2016 10:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+08:00) Perth
+DaylightName: W. Australia Daylight Time
+StandardName: W. Australia Standard Time
+Id: W. Australia Standard Time
+Date Time: 14-08-2016 10:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+08:00) Taipei
+DaylightName: Taipei Daylight Time
+StandardName: Taipei Standard Time
+Id: Taipei Standard Time
+Date Time: 14-08-2016 10:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+08:00) Ulaanbaatar
+DaylightName: Ulaanbaatar Daylight Time
+StandardName: Ulaanbaatar Standard Time
+Id: Ulaanbaatar Standard Time
+Date Time: 14-08-2016 11:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+08:30) Pyongyang
+DaylightName: North Korea Daylight Time
+StandardName: North Korea Standard Time
+Id: North Korea Standard Time
+Date Time: 14-08-2016 10:47:46
+
+---------------------------------------------
+
+DisplayName: (UTC+08:45) Eucla
+DaylightName: Aus Central W. Daylight Time
+StandardName: Aus Central W. Standard Time
+Id: Aus Central W. Standard Time
+Date Time: 14-08-2016 11:02:46
+
+---------------------------------------------
+
+DisplayName: (UTC+09:00) Chita
+DaylightName: Transbaikal Daylight Time
+StandardName: Transbaikal Standard Time
+Id: Transbaikal Standard Time
+Date Time: 14-08-2016 11:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+09:00) Osaka, Sapporo, Tokyo
+DaylightName: Tokyo Daylight Time
+StandardName: Tokyo Standard Time
+Id: Tokyo Standard Time
+Date Time: 14-08-2016 11:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+09:00) Seoul
+DaylightName: Korea Daylight Time
+StandardName: Korea Standard Time
+Id: Korea Standard Time
+Date Time: 14-08-2016 11:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+09:00) Yakutsk
+DaylightName: Russia TZ 8 Daylight Time
+StandardName: Russia TZ 8 Standard Time
+Id: Yakutsk Standard Time
+Date Time: 14-08-2016 11:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+09:30) Adelaide
+DaylightName: Cen. Australia Daylight Time
+StandardName: Cen. Australia Standard Time
+Id: Cen. Australia Standard Time
+Date Time: 14-08-2016 11:47:46
+
+---------------------------------------------
+
+DisplayName: (UTC+09:30) Darwin
+DaylightName: AUS Central Daylight Time
+StandardName: AUS Central Standard Time
+Id: AUS Central Standard Time
+Date Time: 14-08-2016 11:47:46
+
+---------------------------------------------
+
+DisplayName: (UTC+10:00) Brisbane
+DaylightName: E. Australia Daylight Time
+StandardName: E. Australia Standard Time
+Id: E. Australia Standard Time
+Date Time: 14-08-2016 12:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+10:00) Canberra, Melbourne, Sydney
+DaylightName: AUS Eastern Daylight Time
+StandardName: AUS Eastern Standard Time
+Id: AUS Eastern Standard Time
+Date Time: 14-08-2016 12:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+10:00) Guam, Port Moresby
+DaylightName: West Pacific Daylight Time
+StandardName: West Pacific Standard Time
+Id: West Pacific Standard Time
+Date Time: 14-08-2016 12:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+10:00) Hobart
+DaylightName: Tasmania Daylight Time
+StandardName: Tasmania Standard Time
+Id: Tasmania Standard Time
+Date Time: 14-08-2016 12:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+10:00) Vladivostok
+DaylightName: Russia TZ 9 Daylight Time
+StandardName: Russia TZ 9 Standard Time
+Id: Vladivostok Standard Time
+Date Time: 14-08-2016 12:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+10:30) Lord Howe Island
+DaylightName: Lord Howe Daylight Time
+StandardName: Lord Howe Standard Time
+Id: Lord Howe Standard Time
+Date Time: 14-08-2016 12:47:46
+
+---------------------------------------------
+
+DisplayName: (UTC+11:00) Bougainville Island
+DaylightName: Bougainville Daylight Time
+StandardName: Bougainville Standard Time
+Id: Bougainville Standard Time
+Date Time: 14-08-2016 13:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+11:00) Chokurdakh
+DaylightName: Russia TZ 10 Daylight Time
+StandardName: Russia TZ 10 Standard Time
+Id: Russia Time Zone 10
+Date Time: 14-08-2016 13:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+11:00) Magadan
+DaylightName: Magadan Daylight Time
+StandardName: Magadan Standard Time
+Id: Magadan Standard Time
+Date Time: 14-08-2016 13:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+11:00) Norfolk Island
+DaylightName: Norfolk Daylight Time
+StandardName: Norfolk Standard Time
+Id: Norfolk Standard Time
+Date Time: 14-08-2016 13:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+11:00) Sakhalin
+DaylightName: Sakhalin Daylight Time
+StandardName: Sakhalin Standard Time
+Id: Sakhalin Standard Time
+Date Time: 14-08-2016 13:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+11:00) Solomon Is., New Caledonia
+DaylightName: Central Pacific Daylight Time
+StandardName: Central Pacific Standard Time
+Id: Central Pacific Standard Time
+Date Time: 14-08-2016 13:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+12:00) Anadyr, Petropavlovsk-Kamchatsky
+DaylightName: Russia TZ 11 Daylight Time
+StandardName: Russia TZ 11 Standard Time
+Id: Russia Time Zone 11
+Date Time: 14-08-2016 14:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+12:00) Auckland, Wellington
+DaylightName: New Zealand Daylight Time
+StandardName: New Zealand Standard Time
+Id: New Zealand Standard Time
+Date Time: 14-08-2016 14:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+12:00) Coordinated Universal Time+12
+DaylightName: UTC+12
+StandardName: UTC+12
+Id: UTC+12
+Date Time: 14-08-2016 14:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+12:00) Fiji
+DaylightName: Fiji Daylight Time
+StandardName: Fiji Standard Time
+Id: Fiji Standard Time
+Date Time: 14-08-2016 14:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+12:00) Petropavlovsk-Kamchatsky - Old
+DaylightName: Kamchatka Daylight Time
+StandardName: Kamchatka Standard Time
+Id: Kamchatka Standard Time
+Date Time: 14-08-2016 15:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+12:45) Chatham Islands
+DaylightName: Chatham Islands Daylight Time
+StandardName: Chatham Islands Standard Time
+Id: Chatham Islands Standard Time
+Date Time: 14-08-2016 15:02:46
+
+---------------------------------------------
+
+DisplayName: (UTC+13:00) Nuku'alofa
+DaylightName: Tonga Daylight Time
+StandardName: Tonga Standard Time
+Id: Tonga Standard Time
+Date Time: 14-08-2016 15:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+13:00) Samoa
+DaylightName: Samoa Daylight Time
+StandardName: Samoa Standard Time
+Id: Samoa Standard Time
+Date Time: 14-08-2016 15:17:46
+
+---------------------------------------------
+
+DisplayName: (UTC+14:00) Kiritimati Island
+DaylightName: Line Islands Daylight Time
+StandardName: Line Islands Standard Time
+Id: Line Islands Standard Time
+Date Time: 14-08-2016 16:17:46
+
+---------------------------------------------
+

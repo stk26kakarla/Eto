@@ -1,0 +1,4 @@
+Alerts
+Register sevas or events
+payment portal
+Member registeration login name validation

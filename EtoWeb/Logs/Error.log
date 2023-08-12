@@ -1,0 +1,6 @@
+2016-08-30 23:43:15.7260|ERROR|EtoWeb.Controllers.EtoAuthenticatedController|System.ArgumentNullException: Value cannot be null.
+Parameter name: hostname
+   at System.Net.Sockets.TcpClient..ctor(String hostname, Int32 port)
+   at S22.Imap.ImapClient.Connect(String hostname, Int32 port, Boolean ssl, RemoteCertificateValidationCallback validate)
+   at S22.Imap.ImapClient..ctor(String hostname, Int32 port, String username, String password, AuthMethod method, Boolean ssl, RemoteCertificateValidationCallback validate)
+   at EtoWeb.Controllers.EtoAuthenticatedController.SyncMail(User LoggedInUser) in G:\Accenture\Eto\EtoWeb\Controllers\EtoAuthenticatedController.cs:line 66

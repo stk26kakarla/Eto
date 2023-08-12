@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+    <style type="text/css">
+    table { width: 100%; page-break-inside:avoid; }
+    body { font-family: 'Cambria', 'Times New Roman', Serif; }
+    table { margin-bottom: 15px; }
+    table table { border-bottom: none; margin-bottom: 0; }
+    
+    .striped tbody tr:nth-child(even) { background-color: #ccc; } 
+    
+    
+    
+.ct-report-heading {
+    vertical-align: top;
+    padding : 10px;
+    text-align:center;
+   
+}
+
+.ct-report-table-heading {
+    vertical-align: top;
+    padding : 10px;
+    text-align:center;
+    font-size:small;
+}
+
+.ct-report-table-heading > th {
+   /* border-top:1px solid;
+    border-bottom:1px solid; */
+}
+
+.ct-report-subheading {
+    vertical-align: top;
+    padding :15px 0px 10px 0px;
+    text-align: left;
+    text-decoration : underline;
+    font-weight:bold;
+}
+
+.ct-reportNormal {
+    padding : 5px;
+    text-align : center;
+}
+
+.amount {
+    text-align:right;
+    padding: 0px 15px 0px 0px;
+    
+}
+
+.name {
+    text-align:left;
+    padding: 15px 0px 0px 0px;
+}
+
+.label {
+    font-weight: bold;
+    text-align:left;
+}
+
+.no-margin{
+    margin: 0px;
+    padding:0px;
+}
+
+.signature{
+    
+    padding-left:2em;
+    margin-left:2em;
+}
+
+.small
+{
+    font-size:small;
+}
+
+.extra-padding{
+        padding-left:2em;
+    }
+
+.value {
+    text-align:left;
+}
+.ct-report-total {
+    font-weight:bold;
+    padding:5px;
+}
+.ct-report-total > td  
+{
+    border-top:1px solid;
+}
+
+@page completeReport
+{
+    size: 8.27in 11.69in;
+    margin: 0.5in 0.5in 0.5in 0.5in;
+}
+
+#completeReport
+{
+    page: completeReport;
+}
+</style>
+</head>
+
+<body>
+
+<!--[if gte mso 9]> 
+<xml> 
+<w:WordDocument> 
+<w:View>Print</w:View> 
+<w:Zoom>90</w:Zoom> 
+<w:DoNotOptimizeForBrowser/> 
+</w:WordDocument> 
+</xml> 
+<![endif]-->
+<div id="completeReport">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="divheader">
+<table class="table table-condensed m40" title="General Information">
+    <tr>
+        <th colspan="2" class="name">
+            <h2 class="no-margin">Swetank S Kakarla</h2>
+        </th>
+        <th colspan="2" class="amount">
+            <h2 class="no-margin">AY 2015-2016</h2>
+        </th>
+    </tr>
+    <tr >
+        <td colspan="2">
+            <span class="label">Address:</span>
+            <span class="value">B-901, Sai Pride Sector-18 Sanpada</span>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <span class="value">
+Navi Mumbai ,                 MAHARASHTRA
+                     -  400705            </span>
+             
+        </td>
+    </tr>
+
+        <tr>
+            <td colspan="2">
+                <span class="label">Mobile:</span>
+                <span class="value">8097541316</span>
+            </td>
+        </tr>
+
+    <tr class="ct-report-heading">
+        <th colspan="4">
+            <h3>Computation of Income</h3>
+        </th>
+    </tr>
+</table>
+<hr/>
+</div>
+<table class="table table-condensed striped m40" title="General Information">
+    
+    
+    
+    <tr>
+        <td class="label">
+            PAN:
+        </td>
+        <td class="value">
+           CFXPK0344F
+        </td>
+        <td class="label">
+            Status:
+        </td>
+        <td class="value">
+           Individual
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label">
+            Date of Birth
+        </td>
+        <td class="value">
+            26/06/1992
+        </td>
+        <td class="label">
+            Residential Status:
+        </td>
+        <td class="value">
+            Resident
+        </td>
+    </tr>
+
+        <tr >
+            <td class="label">
+                Father's Name:
+            </td>
+            <td class="value">
+                Ravi Venkatasesha Kakarla
+            </td>
+            <td class="label">
+                Gender :
+            </td>
+            <td class="value">
+                Male
+            </td>
+        </tr>
+    
+        <tr>
+            <td class="label">
+                Bank A/C no.:
+            </td>
+            <td class="value">
+                306104000013323
+            </td>
+            <td class="label">
+                IFSC code :
+            </td>
+            <td class="value">
+                IBKL0000306
+            </td>
+        </tr>
+        <tr>
+            <td class="label">
+                Aadhaar Card Number
+            </td>
+            <td class="value">
+                853140434992
+            </td>
+        </tr>
+        <tr>
+            <td class="label">
+                Passport Number
+            </td>
+            <td class="value">
+                L6872081
+            </td>
+        </tr>
+</table>
+
+
+
+                <table class="table table-condensed m60" title="Summary of Income">
+    <tr class="ct-report-heading"><th colspan="4"><h4>Summary Of Income</h4></th></tr>
+<tr class="ct-report-normal"><td>Salary</td><td></td><td align="right">2,00,000</td><td></td></tr><tr class="ct-report-normal"><td>Other Sources</td><td></td><td align="right">50,000</td><td></td></tr>    
+<tr class="ct-report-normal"><td>Gross Total Income</td><td></td><td align="right">2,50,000</td><td></td></tr><tr class="ct-report-normal"><td>Total Income</td><td></td><td align="right">2,50,000</td><td></td></tr>    
+    
+<tr class="ct-report-normal"><td>Tax Due</td><td></td><td align="right">0</td><td></td></tr>    
+    
+    <!-- Total Exempt -->
+</table>
+
+                    <table class="table table-condensed m60" title="Individual Information">
+<tr class="ct-report-heading"><th colspan="4"><h4>Salary Income</h4></th></tr>                <tr class="">
+                    <td colspan="2">Thru-Put Management Systems Pvt. Ltd.</td>
+                    <td colspan ="2"></td>
+                </tr>
+<tr class="ct-report-normal"><td>Salay/Pension</td><td></td><td align="right">2,00,000</td><td></td></tr>    
+<tr class="ct-report-total"><td>Total Salary</td><td></td><td></td><td align="right">2,00,000</td></tr>    </table>
+
+                <table class="table table-condensed m60"><tr class="ct-report-heading"><th colspan="4"><h4>Other Income</h4></th></tr><tr class="ct-report-normal"><td>Gross Other</td><td></td><td align="right">50,000</td><td></td></tr><tr class="ct-report-nested"><td>&nbsp &nbsp &nbsp &nbsp Misc Other</td><td align="right">50,000</td><td></td><td></td></tr><tr class="ct-report-total"><td>Total</td><td></td><td></td><td align="right">50,000</td></tr></table><table class="table table-condensed m60"><tr class="ct-report-heading"><th colspan="4"><h4>Income Tax</h4></th></tr><tr class="ct-report-normal"><td>Total Income</td><td></td><td align="right">2,50,000</td><td></td></tr><tr class="ct-report-normal"><td>Basic Exemption</td><td></td><td align="right">2,50,000</td><td></td></tr><tr class="ct-report-normal"><td>Income Tax</td><td></td><td align="right">0</td><td></td></tr><tr class="ct-report-normal"><td>Payable</td><td></td><td align="right">0</td><td></td></tr></table>
+            <table class="table table-condensed m60" title="Tds For Salary Table">
+            <tr>
+                <th colspan ="4" class="ct-report-heading"><h4>TDS From Salary</h4></th>
+            </tr>
+            <tr class="ct-report-heading">
+                <th>Tan of Employer</th>
+                <th>Name of Employer</th>
+                <th>Income chargeable Under Salary</th>
+                <th>Tax Deducted</th>
+            </tr>
+                <tr>
+                    <td></td>
+                    <td>Thru-Put Management Systems Pvt. Ltd.</td>
+                        <td class="amount">2,00,000</td>
+                        <td class="amount">Rs. 0</td>
+                </tr>
+
+            </table>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+<div class="footer m60">
+    
+    <br /><br /><br />
+    <div class="signature">
+        <p class="extra-padding">Signature </p>
+        For Swetank S Kakarla
+    </div>
+    <p class="amount small">
+        Generated by ClearTax (<a href="https://cleartax.in">www.cleartax.in</a>)
+    </p>
+    
+</div>
+
+</div>
+</body>
+</html>
