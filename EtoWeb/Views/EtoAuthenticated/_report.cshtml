@@ -1,0 +1,243 @@
+﻿<div id="MISWindow" style="display:none;">
+    <div>
+        <select id="ReportCategories"></select>
+
+        <input id="StartDate" />
+        <input id="EndDate" />
+
+        <button class="k-button" onclick="showGraphDemo()">Generate reports</button>
+    </div>
+    <div id="WorkItemReport"></div>
+</div>
+<script>
+
+    function openMISWindow() {
+        $("#MISWindow").kendoWindow({
+            width: "50%",
+            height: "80%",
+            title: "MIS",
+            visible: false,
+            modal: true,
+            actions: [
+                "Minimize",
+                "Maximize",
+                "Close"
+            ],
+            close: function (e) {
+                var WorkItemReport = $("#WorkItemReport").data("kendoChart");
+                WorkItemReport.destroy();
+
+                $("#WorkItemReport").html("");
+
+            }
+        }).data("kendoWindow").center().open();
+
+        var ReportCategoriesData = [
+            { text: "Status", value: "status" },
+            { text: "Shift", value: "shift" },
+            { text: "Country", value: "country" },
+            { text: "Work Type", value: "worktype" },
+            { text: "Business", value: "business" },
+            { text: "Hierarchy", value: "hierarchy" },
+            { text: "Manager", value: "manager" },
+            { text: "Date", value: "date" },
+        ];
+
+        var ReportCategories = $("#ReportCategories").data("kendoDropDownList");
+
+        if (ReportCategories == undefined) {
+            ReportCategories = $("#ReportCategories").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: ReportCategoriesData,
+                index: 0
+            }).data("kendoDropDownList");
+        }
+
+        ReportCategories.select(0);
+
+        var StartDate = $("#StartDate").data("kendoDatePicker");
+        if (StartDate == undefined) {
+            StartDate = $("#StartDate").kendoDatePicker({
+                format: "dd/MMM/yyyy",
+                parseFormats: "dd/MM/yyyy",
+                change: startDateChange
+            }).data("kendoDatePicker");
+        }
+
+        var EndDate = $("#EndDate").data("kendoDatePicker");
+        if (EndDate == undefined) {
+            EndDate = $("#EndDate").kendoDatePicker({
+                format: "dd/MMM/yyyy",
+                parseFormats: "dd/MM/yyyy",
+                change: endDateChange
+            }).data("kendoDatePicker");
+        }
+
+        StartDate.value(new Date());
+        //var OneWeekLater = new Date();
+        //OneWeekLater.setDate(OneWeekLater.getDate() + 7);
+        //EndDate.value(OneWeekLater);
+        EndDate.value(null);
+
+        StartDate.max(EndDate.value());
+        EndDate.min(StartDate.value());
+    }
+
+    function showGraphDemo() {
+        var ReportCategory = $("#ReportCategories").data("kendoDropDownList").value();
+        var FromDate = $("#StartDate").data("kendoDatePicker").value();
+        var ToDate = $("#EndDate").data("kendoDatePicker").value();
+
+        var checkedNodes = [];
+        var HierarchyTreeView = $("#HierarchyTreeView").data("kendoTreeView");
+        if (HierarchyTreeView != undefined && HierarchyTreeView != null) {
+            checkedNodeIds(HierarchyTreeView.dataSource.view(), checkedNodes);
+
+            HierarchyIds = checkedNodes;
+        }
+
+        var notification = $("#notification").data("kendoNotification");
+
+        if (FromDate != null && ToDate != null) {
+
+            var response = ajaxServerInteraction("POST", "/api/MIS/GenerateReport",
+                   {
+                       "HierarchyIds": HierarchyIds,
+                       "ReportCategory": ReportCategory,
+                       "FromDate": FromDate.toISOString(),
+                       "ToDate": ToDate.toISOString()
+                   });
+
+            if (response.IsSuccess) {
+                notification.success(response.ResponseMessage);
+
+                //var categoryField = "Category";
+                //if (ReportCategory == "date") {
+                //    categoryField = "DateTimeCategory";
+                //}
+
+                $("#WorkItemReport").kendoChart({
+                    dataSource: response.Object,
+                    renderAs: "canvas",
+                    title: {
+                        align: "left"
+                        //text: "Requests by Manager"
+                    },
+                    legend: {
+                        visible: true
+                    },
+                    seriesDefaults: {
+                        type: "column",
+                        stack: true
+                    },
+                    series: [{
+                        field: "BlankItemsCount",
+                        name: "Blank",
+                        color: "Beige"
+                    },
+                    {
+                        field: "BlackItemsCount",
+                        name: "Black",
+                        color: "rgba(12, 10, 23, 0.88)"
+                    },
+                    {
+                        field: "RedItemsCount",
+                        name: "Red",
+                        color: "rgba(191,0,0,1)"
+                    }, {
+                        field: "YellowItemsCount",
+                        name: "Yellow",
+                        color: "rgba(223,223,0,1)"
+                    }, {
+                        field: "GreenItemsCount",
+                        name: "Green",
+                        color: "rgb(2, 99, 2)"
+                    }, {
+                        field: "WhiteItemsCount",
+                        name: "White",
+                        color: "White"
+                    }
+                    ],
+                    valueAxis: {
+                        visible: true
+                    },
+                    categoryAxis: {
+                        min: 0,
+                        max: 10,
+                        labels: {
+                            rotation: "auto"
+                        },
+                        field: "Category"
+                        //baseUnit: "months"
+                    },
+                    tooltip: {
+                        visible: true,
+                        template: "#= value #"
+                    },
+                    pannable: {
+                        lock: "y"
+                    },
+                    zoomable: {
+                        mousewheel: {
+                            lock: "y"
+                        },
+                        selection: {
+                            lock: "y"
+                        }
+                    }
+                });
+            }
+            else if (response.IsWarning) {
+                notification.error(response.ResponseMessage);
+            }
+            else if (response.IsError) {
+                alert(response.ResponseMessage);
+            }
+
+        } else {
+            notification.error("A date range is mandatory.");
+        }
+    }
+
+    function startDateChange() {
+        var StartDate = $("#StartDate").data("kendoDatePicker");
+        var EndDate = $("#EndDate").data("kendoDatePicker");
+
+        var startDate = StartDate.value();
+        var endDate = EndDate.value();
+
+        if (startDate) {
+            startDate = new Date(startDate);
+            startDate.setDate(startDate.getDate());
+            EndDate.min(startDate);
+        } else if (endDate) {
+            StartDate.max(new Date(endDate));
+        } else {
+            endDate = new Date();
+            StartDate.max(endDate);
+            EndDate.min(endDate);
+        }
+    }
+
+    function endDateChange() {
+        var StartDate = $("#StartDate").data("kendoDatePicker");
+        var EndDate = $("#EndDate").data("kendoDatePicker");
+
+        var endDate = EndDate.value();
+        var startDate = StartDate.value();
+
+        if (endDate) {
+            endDate = new Date(endDate);
+            endDate.setDate(endDate.getDate());
+            StartDate.max(endDate);
+        } else if (startDate) {
+            EndDate.min(new Date(startDate));
+        } else {
+            endDate = new Date();
+            StartDate.max(endDate);
+            EndDate.min(endDate);
+        }
+    }
+
+</script>

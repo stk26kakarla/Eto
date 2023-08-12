@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Welcome to Eto";
+}
+
+<h2 id="AuthenticationStatusHeader">Loading...</h2>
+
+<script>
+    $(document).ready(function () {
+        try {
+            var authenticationStatus = ajaxServerInteraction("GET", "/api/ApiAuthentication/Authenticated", {}).Object
+            $("#AuthenticationStatusHeader").html(authenticationStatus);
+        } catch (e) {
+            $("#AuthenticationStatusHeader").html("Something went wrong./n" + e);
+        }
+    });
+</script>

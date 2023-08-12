@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Statuses";
+}
+<script>
+    $(document).ready(function () {
+        createStatusGridView()
+    });
+
+    function createStatusGridView() {
+        var connection = $.connection;
+        var hub = connection.statusGridHub;
+        var hubStart = connection.hub.start();
+
+        $("#StatusGridView").kendoGrid({
+            sortable: true,
+            resizable: true,
+            filterable: true,
+            reorderable: true,
+            columnMenu: {
+                filterable: true,
+                sortable: false
+            },
+            selectable: "multiple, row",
+            pageable: {
+                refresh: true,
+                pageSizes: [20, 30, 40, 50],
+                buttonCount: 5,
+                pageSize: 20,
+                info: true,
+                messages: {
+                    empty: "No data"
+                }
+            },
+            noRecords: true,
+            mobile: true,
+            editable: {
+                mode: "incell",
+                createAt: "top",
+                destroy: false
+            },
+            edit: function (e) {
+                var columnIndex = this.cellIndex(e.container);
+                var fieldName = this.thead.find("th").eq(columnIndex).data("field");
+                var isEditable = true;
+
+                isEditable = e.model.hasOwnProperty("Id") && (e.model.Id !== 1 && e.model.Id !== 2 && e.model.Id !== 3 && e.model.Id !== 4 && e.model.Id !== 5);
+
+                if (!isEditable) {
+                    // Close the cell (exit edition mode)
+                    this.closeCell();
+                    var notification = $("#notification").data("kendoNotification");
+                    notification.error("This field cannot be made editable.");
+                }
+                e.preventDefault();
+            },
+            columns: generateGridColumns(1, "Status"),
+            toolbar: generateGridCommands(0, "Status"),
+            dataSource: {
+                batch: false,
+                type: "signalr",
+                serverPaging: false,
+                serverSorting: false,
+                serverFiltering: false,
+                autoSync: false,
+                // Handle the push event to display notifications when push updates arrive
+                push: function (e) {
+                    var notification = $("#notification").data("kendoNotification");
+                    notification.success(e.type);
+                    //notifyMe(e.type)
+                },
+                schema: {
+                    errors: function (response) {
+                        return response.error;
+                    },
+                    model: {
+                        id: "Id",
+                        fields: getGridModelFields("Status")
+                    }
+                },
+                error: function(e) {
+                    console.log(e.xhr.message); // displays "Invalid query"
+                },
+                transport: {
+                    signalr: {
+                        promise: hubStart,
+                        hub: hub,
+                        server: {
+                            read: "read",
+                            update: "update",
+                            destroy: "destroy",
+                            create: "create"
+                        },
+                        client: {
+                            read: "read",
+                            update: "update",
+                            destroy: "destroy",
+                            create: "create"
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+</script>
+<div id="StatusGridView" class="EtoGrid"></div>

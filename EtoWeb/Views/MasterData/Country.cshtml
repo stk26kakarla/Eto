@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Countries";
+}
+<script>
+    $(document).ready(function () {
+        createCountryGridView()
+    });
+
+    function createCountryGridView() {
+        var connection = $.connection;
+        var hub = connection.countryGridHub;
+        var hubStart = connection.hub.start();
+
+        $("#CountryGridView").kendoGrid({
+            sortable: true,
+            resizable: true,
+            filterable: true,
+            reorderable: true,
+            columnMenu: {
+                filterable: true,
+                sortable: false
+            },
+            selectable: "multiple, row",
+            pageable: {
+                refresh: true,
+                pageSizes: [20, 30, 40, 50],
+                buttonCount: 5,
+                pageSize: 20,
+                info: true,
+                messages: {
+                    empty: "No data"
+                }
+            },
+            noRecords: true,
+            mobile: true,
+            editable: {
+                mode: "incell",
+                createAt: "top",
+                destroy: false
+            },
+            columns: generateGridColumns(1, "Country"),
+            toolbar: generateGridCommands(0, "Country"),
+            dataSource: {
+                type: "signalr",
+                serverPaging: false,
+                serverSorting: false,
+                serverFiltering: false,
+                autoSync: false,
+                // Handle the push event to display notifications when push updates arrive
+                push: function (e) {
+                    var notification = $("#notification").data("kendoNotification");
+                    notification.success(e.type);
+                    //notifyMe(e.type)
+                },
+                schema: {
+                    model: {
+                        id: "Id",
+                        fields: getGridModelFields("Country")
+                    }
+                },
+                transport: {
+                    signalr: {
+                        promise: hubStart,
+                        hub: hub,
+                        server: {
+                            read: "read",
+                            update: "update",
+                            destroy: "destroy",
+                            create: "create"
+                        },
+                        client: {
+                            read: "read",
+                            update: "update",
+                            destroy: "destroy",
+                            create: "create"
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+</script>
+
+<div id="CountryGridView"  class="EtoGrid"></div>

@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<script>
+    $(document).ready(function () {
+        createColumnConfigurationGridView();
+    });
+    function createColumnConfigurationGridView() {
+        var connection = $.connection;
+        var hub = connection.columnConfigurationHub;
+        var hubStart = connection.hub.start();
+
+        $("#ColumnConfigurationGridView").kendoGrid({
+            sortable: true,
+            resizable: true,
+            filterable: true,
+            reorderable: true,
+            columnMenu: {
+                filterable: true,
+                sortable: false
+            },
+            selectable: "multiple, row",
+            pageable: {
+                refresh: true,
+                pageSizes: [20, 30, 40, 50],
+                buttonCount: 5,
+                pageSize: 20,
+                info: true,
+                messages: {
+                    empty: "No data"
+                }
+            },
+            noRecords: true,
+            mobile: true,
+            editable: {
+                mode: "incell",
+                createAt: "top",
+                destroy: false
+            },
+            edit: function (e) {
+                var columnIndex = this.cellIndex(e.container);
+                var fieldName = this.thead.find("th").eq(columnIndex).data("field");
+                var isEditable = true;
+
+                if (fieldName === "Editable") {
+                    isEditable = e.model.hasOwnProperty("EditTemplateType") && e.model.EditTemplateType !== null;
+                }
+                if (!isEditable) {
+                    // Close the cell (exit edition mode)
+                    this.closeCell();
+                    var notification = $("#notification").data("kendoNotification");
+                    notification.error("This field cannot be made editable.");
+                }
+                e.preventDefault();
+            },
+            columns: generateGridColumns(1, "ColumnConfiguration"),
+            toolbar: generateGridCommands(0, "ColumnConfiguration"),
+            dataSource: {
+                type: "signalr",
+                serverPaging: false,
+                serverSorting: false,
+                serverFiltering: false,
+                autoSync: false,
+                // Handle the push event to display notifications when push updates arrive
+                //push: function (e) {
+                //    var notification = $("#notification").data("kendoNotification");
+                //    notification.success(e.type);
+                //    //notifyMe(e.type)
+                //},
+                schema: {
+                    model: {
+                        id: "Id",
+                        fields: getGridModelFields("ColumnConfiguration")
+                    }
+                },
+                transport: {
+                    signalr: {
+                        promise: hubStart,
+                        hub: hub,
+                        server: {
+                            read: "read",
+                            update: "update",
+                            destroy: "destroy",
+                            create: "create"
+                        },
+                        client: {
+                            read: "read",
+                            update: "update",
+                            destroy: "destroy",
+                            create: "create"
+                        }
+                    }
+                }
+            }
+        });
+    }
+   
+</script>
+<div id="ColumnConfigurationGridView" class="EtoGrid"></div>

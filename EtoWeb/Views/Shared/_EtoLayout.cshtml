@@ -1,0 +1,124 @@
+﻿@using EtoWeb.Extensions
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="The description of my page" />
+    <title>@User.Identity.Name</title>
+
+    <link href="~/Content/fonts.css?family=Roboto+Slab" rel="stylesheet" />
+    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto+Slab'>
+    <script>
+        currentLoggedInUserId =@User.Identity.GetLoggedInUserId();
+    </script>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/scripts")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    <script src="~/signalr/hubs"></script>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        footer {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .EtoGrid {
+            height: 86vh;
+        }
+
+        .gridDetailTemplate {
+            width: 92vw;
+        }
+    </style>
+
+    <style>
+        /*Kendo personalization*/
+        .k-splitter .k-ghost-splitbar {
+            background-color: #7987ca;
+        }
+
+        .k-grid tbody button.k-button {
+            min-width: 10px;
+        }
+
+        .k-button, .k-toolbar .k-button {
+            padding: 5px 7.8px;
+        }
+
+        .k-editor-toolbar .k-button-group .k-tool {
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        kendo.culture("en-IN");
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#notification").kendoNotification({
+                width: "50%",
+                position: {
+                    top: 0,
+                    right: 0
+                }
+            });
+
+            var globalNotificationConnection = $.connection;
+            var globalNotificationHub = $.connection.globalNotificationHub;
+
+            globalNotificationHub.client.globalDesktopNotification = function (title, body, icon, data, tag, sticky, noscreen) {
+                globalDesktopNotification(title, body, icon, data, tag, sticky, noscreen);
+            };
+
+            globalNotificationHub.client.globalKendoNotification = function (message, messageType) {
+                globalKendoNotification(message, messageType)
+            };
+
+            globalNotificationConnection.hub.start();
+
+        });
+
+        //$(window).resize(function () {
+        //    resizeGrid();
+        //});
+
+        function globalDesktopNotification(title, body, icon, data, tag, sticky, noscreen) {
+            notifyMe(title, body, icon, data, tag, sticky, noscreen)
+        }
+
+        function globalKendoNotification(message, messageType) {
+            var globalKendoNotification = $("#notification").data("kendoNotification");
+            globalKendoNotification.show(message, messageType);
+        }
+
+    </script>
+    <script>
+        function goToLoginPage() {
+            var currentURL = window.location.pathname;
+            var loginURL = '@Url.Action("Login", "Account", new { returnUrl = "___currentURL___" })';
+            window.location.href = loginURL.replace("___currentURL___", encodeURI(currentURL));
+        }
+    </script>
+
+</head>
+<body>
+    <div id="notification"></div>
+    <div id="k-content" style="height:88vh">
+        @RenderBody()
+    </div>
+    <footer style="height:54px;margin:10px; border: 1px solid rgba(20,53,80,0.14); box-shadow: 0 1px 2px 1px rgba(0,0,0,.08), 0 3px 6px rgba(0,0,0,.08);">
+        <p style="float:left; margin:22px;display:inline-block;">
+            <span>&copy; @DateTime.Now.Year - Designed and developed by Swetank Kakarla</span>
+        </p>
+        <div style="float:right; display:inline-block;">@Html.Partial("_FooterMenu")</div>
+    </footer>
+</body>
+</html>

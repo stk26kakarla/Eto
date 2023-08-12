@@ -1,0 +1,121 @@
+﻿@model EtoWeb.MVC.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<h2>@ViewBag.Title.</h2>
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "LoginForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Use a local account to log in.</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("Register a new user?", "Register","",)
+                </p>
+                <p>
+                    @Html.ActionLink("Forget your password?", "ForgotPassword")
+                </p>
+            }
+        </section>
+        <script>
+            $(function () {
+                $("#LoginForm").submit(function (event) {
+                    webApiLogin();
+                });
+            });
+
+            function showError(jqXHR) {
+
+                alert(jqXHR.status + ': ' + jqXHR.statusText);
+            }
+
+            function webApiLogin() {
+
+                var loginData = {
+                    client_id: 'dgxftApp',
+                    grant_type: 'password',
+                    username: $("#Email").val(),
+                    password: $("#Password").val()
+                };
+                
+                $.ajax({
+                    async: false,
+                    type: 'POST',
+                    url: '/token',
+                    data: loginData
+                }).done(function (data) {
+
+                    alert("WebApi Login successfull");
+                    // Cache the access token in session storage.
+                    sessionStorage.setItem("accessToken", data.access_token);
+                    sessionStorage.setItem("client_id", data["as:client_id"]);
+                    sessionStorage.setItem("refresh_token", data.refresh_token);
+
+                }).fail(showError);
+            }
+
+            function refreshToken() {
+                var loginData = {
+                    client_id: sessionStorage.getItem("client_id"),
+                    grant_type: 'refresh_token',
+                    refresh_token: sessionStorage.getItem("refresh_token")
+                };
+
+                $.ajax({
+                    async: false,
+                    type: 'POST',
+                    url: '/token',
+                    data: loginData
+                }).done(function (data) {
+
+                    // Cache the access token in session storage.
+                    sessionStorage.setItem("accessToken", data.access_token);
+                    sessionStorage.setItem("client_id", data["as:client_id"]);
+                    sessionStorage.setItem("refresh_token", data.refresh_token);
+
+                }).fail(showError);
+            }
+
+        </script>
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new EtoWeb.MVC.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,90 @@
+﻿@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-left" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="footerMenu">
+            <ul id="FooterMenu" class="nav navbar-nav navbar-left">
+                <li>
+                    @Html.ActionLink(linkText: "Work Items", actionName: "Index", controllerName: "EtoAuthenticated", routeValues: null, htmlAttributes: new { @class = "" })
+                </li>
+                @if (User.IsInRole("HOD") || User.IsInRole("OrganizationAdmin"))
+                {
+                    <li>
+                        <a id="MasterDataMenu" href="javascript:void(0)">Master Data</a>
+                        <ul>
+                            <li>
+                                @Html.ActionLink(linkText: "Shift", actionName: "Shift", controllerName: "MasterData", routeValues: null, htmlAttributes: new { @class = "" })
+                            </li>
+                            <li>
+                                @Html.ActionLink(linkText: "Country", actionName: "Country", controllerName: "MasterData", routeValues: null, htmlAttributes: new { @class = "" })
+                            </li>
+                            <li>
+                                @Html.ActionLink(linkText: "Status", actionName: "Status", controllerName: "MasterData", routeValues: null, htmlAttributes: new { @class = "" })
+                            </li>
+                            <li>
+                                @Html.ActionLink(linkText: "QA Status", actionName: "QAStatus", controllerName: "MasterData", routeValues: null, htmlAttributes: new { @class = "" })
+                            </li>
+                            <li>
+                                @Html.ActionLink(linkText: "Delay Cause", actionName: "DelayCause", controllerName: "MasterData", routeValues: null, htmlAttributes: new { @class = "" })
+                            </li>
+                            <li>
+                                @Html.ActionLink(linkText: "Work Type", actionName: "WorkType", controllerName: "MasterData", routeValues: null, htmlAttributes: new { @class = "" })
+                            </li>
+                            <li>
+                                @Html.ActionLink(linkText: "Business", actionName: "Business", controllerName: "MasterData", routeValues: null, htmlAttributes: new { @class = "" })
+                            </li>
+                            <li>
+                                @Html.ActionLink(linkText: "Hierarchy", actionName: "Hierarchy", controllerName: "MasterData", routeValues: null, htmlAttributes: new { @class = "" })
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        @Html.ActionLink(linkText: "Configurations", actionName: "Index", controllerName: "Configuration", routeValues: null, htmlAttributes: new { @class = "" })
+                    </li>
+
+                }
+                <li>
+                    <a id="AccountMenu" href="javascript:void(0)">Account</a>
+                    <ul>
+                        <li>
+                            @Html.ActionLink(linkText: "User Details", actionName: "Users", controllerName: "UsersAdmin", routeValues: null, htmlAttributes: new { @class = "" })
+                        </li>
+                        <li>
+                            <a href="javascript:Logoff()">Log off</a>
+                        </li>
+                    </ul>
+                </li>
+                @*<li>
+                    @Html.ActionLink("API", "Index", "Help", new { area = "" }, null)
+                </li>*@
+            </ul>
+
+        </div>
+    }
+
+}
+<script>
+    $(document).ready(function () {
+
+        $("#FooterMenu").kendoMenu({ direction: "top right", closeOnClick: false, popupCollision: false });
+
+        var MasterDataMenu = $("#MasterDataMenu>span");
+        if (MasterDataMenu.hasClass("k-i-arrow-s")) {
+
+            MasterDataMenu.removeClass("k-i-arrow-s");
+            MasterDataMenu.addClass("k-i-arrow-n");
+        }
+
+        var AccountMenu = $("#AccountMenu>span");
+        if (AccountMenu.hasClass("k-i-arrow-s")) {
+
+            AccountMenu.removeClass("k-i-arrow-s");
+            AccountMenu.addClass("k-i-arrow-n");
+        }
+    });
+    function Logoff() {
+        //localStorage["accessToken"] = null;
+        document.getElementById('logoutForm').submit();
+    }
+</script>

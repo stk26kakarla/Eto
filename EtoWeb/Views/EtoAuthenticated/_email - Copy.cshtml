@@ -1,0 +1,474 @@
+﻿@using EtoWeb.Extensions;
+
+<script type="text/x-kendo-tmpl" id="EmailListViewFormAndSubjectTemplate">
+    <div id="Mail#:Id#" class="SenderAndSubject" ondblclick="onDoubleClickOpenBodyWindow('#:Id#', '#:Name#','#:WorkItem.Id#');">
+        <div style="float:left; width:100%;">
+            <p class="Sender">#:Sender#</p>
+            <p class="UpdatedOn">#:kendo.toString( toDate(UpdatedOn), "dd-MMM-yyyy HH:mm" ) #</p>
+        </div>
+        <div><p class="Subject">#:Name#</p></div>
+    </div>
+</script>
+<script type="text/x-kendo-tmpl" id="EmailListViewMainBodyTemplate">
+    <div id="MainBody#:Id#" class="MainBody">
+        <button id="Reply#:Id#" class="k-button ReplyAll" onclick="replyAll('#:Id#', '#:Name#', '#:WorkItem.Id#', '#:WorkItem.ExternalUId#')">Reply All</button>
+
+        <button id="Acknowledge#:Id#" class="k-button Send noDisplay" onclick="appendAcknowledgement('#:Id#', '#:WorkItem.Id#', '#:Recipient#')">Acknowledge</button>
+
+        <button id="Send#:Id#" class="k-button Send noDisplay" onclick="sendMail('#:Id#', '#:Name#', '#:WorkItem.Id#', '#:Recipient#')">Send</button>
+
+        <button id="Cancel" class="k-button Cancel noDisplay" onclick="cancelReply('#:Id#','#:WorkItem.Id#')">Cancel</button>
+        <br />
+
+        <h4 id="Subject#:Id#" class="Subject">#:Name#</h4>
+
+        <h5 id="Sender#:Id#" class="Sender">#:Sender#</h5>
+        <div class="SentDiv">
+            <p class="MainBodyLabel">Sent: </p><p class="UpdatedOn">#:kendo.toString( toDate(UpdatedOn), "dd-MMM-yyyy HH:mm zzz" ) #</p>
+        </div>
+        <div class="RecipientDiv">
+            <p class="MainBodyLabel">To: </p><textarea disabled class="Recipient k-textbox" id="Recipient#:Id#" style="width: 80%;">#:Recipient#</textarea>
+        </div>
+        <div class="CCDiv">
+            <p class="MainBodyLabel">CC: </p><textarea disabled class="CarbonCopy k-textbox" id="CarbonCopy#:Id#" style="width: 80%;">#:CarbonCopy#</textarea>
+        </div>
+        <div id="BlindCarbonCopyDiv" class="noDisplay">
+            <p class="MainBodyLabel">BCC:</p><textarea disabled class="BlindCarbonCopy k-textbox" id="BlindCarbonCopy#:Id#" style="width: 80%;"></textarea>
+        </div>
+        <br />
+        <div class="Body" id="UniqueBodyClassName#:Id#"></div>
+        <br />
+        <div id="Attachments#:Id#" class="Attachments noDisplay">
+            #for(i=0;i<=lengthOfAttachments(Attachments);i++)
+            {
+            var attachment =readAttachmentsDataByIndex(Attachments, i);
+            #
+            <button class="Attachment k-button" title="Double click to download."
+                    ondblclick="onDownloadAttachment('#:Recipient#', '#:Sender#', '#:JSON.stringify(readAttachmentsDataByIndex(Attachments, i))#')">
+                @*<span class="k-tool-icon k-insertFile"></span>*@
+                #:readAttachmentsDataByIndex(Attachments, i).Name +" ("+readAttachmentsDataByIndex(Attachments, i).FileSize+")"#
+            </button>
+            #}#
+        </div>
+        <div id="UploadAttachmentsDiv#:Id#" class="noDisplay">
+
+        </div>
+    </div>
+</script>
+<script id="AttachmentsTemplate" type="text/x-kendo-template">
+    <span class='k-progress'></span>
+    <div class='file-wrapper'>
+        <img class='file-icon' src="~/Images/Attachments/#=addExtensionClass(files[0].extension)#" />
+        <h4 class='file-heading'>#=name# - #=size# kb</h4>
+        <button type='button' class='k-upload-action'></button>
+    </div>
+</script>
+
+<style>
+    
+</style>
+
+<script>
+
+    $(document).ready(function () {
+
+        var etoMailSyncConnection = $.connection;
+        var etoMailHub = $.connection.etoMailHub;
+
+        etoMailHub.client.updateEtoMailListView = function (workItemId, etoMailId) {
+            var FormAndSubjectListView = $("#FormAndSubjectListView" + workItemId).data("kendoListView");
+            if (FormAndSubjectListView != undefined) {
+                FormAndSubjectListView.refresh();
+
+            }
+        };
+
+        etoMailSyncConnection.hub.start();
+    });
+
+    function generateWebMailView(parentId) {
+        var EmailListView = $("#EmailListView" + parentId).data("kendoSplitter");
+        if (EmailListView == undefined || EmailListView == null) {
+            $("#EmailListView" + parentId).kendoSplitter({
+                orientation: "horizontal",
+                panes: [
+                    {
+                        collapsible: true,
+                        size: "30%",
+                        max: "40%",
+                        min: "20%"
+                    },
+                    {
+                        collapsible: false,
+                        size: "70%"
+                    }
+                ]
+            });
+        }
+    }
+
+    function generateEmailListView(workItem) {
+
+        var EtoMailData = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "/api/MailService/GetMailsForWorkItem",
+                    dataType: "jsonp",
+                    data:
+                    {
+                        CurrentLoggedUserId: currentLoggedInUserId,
+                        WorkItemId: workItem.Id
+                    }
+                }
+            },
+            schema: {
+                data: "Object",
+                model: {
+                    id: "WorkItemId",
+                    fields: {
+                        UpdatedOn: { type: "date" }
+                    },
+                }
+            }
+        });
+
+        $("#FormAndSubjectListView" + workItem.Id).kendoListView({
+            dataSource: EtoMailData,
+            template: kendo.template($("#EmailListViewFormAndSubjectTemplate").html()),
+            selectable: true,
+            change: function () { onFormAndSubject(workItem.Id); }
+        });
+
+        var FormAndSubjectListView = $("#FormAndSubjectListView" + workItem.Id).data("kendoListView");
+        FormAndSubjectListView.select(FormAndSubjectListView.element.children().first());
+    }
+
+    function onFormAndSubject(workItemId) {
+        var FormAndSubjectListView = $("#FormAndSubjectListView" + workItemId).data("kendoListView");
+        var selectedRow = FormAndSubjectListView.dataItem(FormAndSubjectListView.select());
+
+        $("#MainBodyDetailView" + workItemId).kendoListView({
+            dataSource: $.makeArray(selectedRow),
+            template: kendo.template($("#EmailListViewMainBodyTemplate").html()),
+            dataBound: function () {
+                generateMainBodyView(selectedRow, workItemId);
+            }
+        });
+    }
+
+    function generateMainBodyView(selectedRow, workItemId) {
+
+        var BodyEditor = $("#UniqueBodyClassName" + selectedRow.Id).data("kendoEditor");
+
+        if (BodyEditor == undefined || BodyEditor == null) {
+            $("#UniqueBodyClassName" + selectedRow.Id).kendoEditor({
+                // Empty tools so do not display toolbar
+                tools: kendoEditorToolsArray
+            });
+
+            BodyEditor = $("#UniqueBodyClassName" + selectedRow.Id).data("kendoEditor");
+        }
+        BodyEditor.value(selectedRow.MailBody);
+        $(BodyEditor.body).attr('contenteditable', false);
+        $("#Attachments" + selectedRow.Id).fadeIn();
+        $("#UploadAttachmentsDiv" + selectedRow.Id).fadeOut("fast");
+
+        $("#Send" + selectedRow.Id).fadeOut("fast");
+        $("#Acknowledge" + selectedRow.Id).fadeOut("fast");
+        $("#Cancel").fadeOut("fast");
+        $("#Reply" + selectedRow.Id).fadeIn();
+    }
+
+    function onDoubleClickOpenBodyWindow(id, subject, workItemId) {
+
+        var MainBodyWindow = $("#MainBody" + id).data("kendoWindow");
+
+        if (MainBodyWindow == undefined || MainBodyWindow == null) {
+
+            $("#MainBody" + id).kendoWindow({
+                width: "50%",
+                height: "80%",
+                title: subject,
+                actions: [
+                        "Minimize",
+                        "Maximize",
+                        "Close"
+                ],
+                close: function () { onFormAndSubject(workItemId); }
+            });
+
+            MainBodyWindow = $("#MainBody" + id).data("kendoWindow");
+        }
+
+        MainBodyWindow.wrapper.addClass("zIndexEnforce");
+        MainBodyWindow.center().open();
+    }
+
+    function lengthOfAttachments(attachments) {
+        var length = 0;
+        if (attachments != undefined && attachments != null) {
+            length = attachments.length;
+        }
+
+        return length - 1;
+    }
+
+    function readAttachmentsDataByIndex(attachments, index) {
+        return attachments[index];
+    }
+
+    function uploadAttachments(id, subject) {
+
+        var InputAttachmentsFileId = "UploadAttachements" + id;
+        var dynamicAttachments = "<input id='" + InputAttachmentsFileId + "' type='file' class='UploadAttachments' />";
+
+        var InputAttachmentsFileUploader = $("#" + InputAttachmentsFileId).data("kendoUpload");
+        if (InputAttachmentsFileUploader != undefined) {
+            InputAttachmentsFileUploader.destroy();
+        }
+
+        $("#" + InputAttachmentsFileId).remove();
+
+        $("#UploadAttachmentsDiv" + id).append(dynamicAttachments);
+
+        $("#" + InputAttachmentsFileId).kendoUpload({
+            multiple: true,
+            async: {
+                saveUrl: "/EtoAuthenticated/SaveAttachments",
+                removeUrl: "/EtoAuthenticated/Remove",
+                saveField: "UploadAttachements",
+                autoUpload: false
+            },
+            //template: kendo.template($('#AttachmentsTemplate').html()),
+            select: function (e) {
+                onAttachmentsSelect(e, id);
+            },
+            cancel: function (e) {
+                onAttachmentsCancel(e, id);
+            },
+
+            upload: function (e) {
+                e.data = { Subject: subject };
+                onAttachmentsUpload(e, id);
+            },
+            remove: function (e) {
+                e.data = { Subject: subject };
+                onAttachmentsRemove(e, id);
+            },
+            success: function (e) {
+                onAttachmentsUploadSuccess(e, id);
+            },
+            error: function (e) {
+                onAttachmentsUploadError(e, id);
+            }
+        });
+    }
+
+    function onAttachmentsSelect(e, id) {
+        var files = e.files;
+        // Check the extension of each file and abort the upload if it is .exe
+        $.each(files, function () {
+            if (this.extension.toLowerCase() == ".exe") {
+                alert(" .exe files not allowed")
+                e.preventDefault();
+            } else {
+                enableSendButton(id, true);
+            }
+        });
+    }
+
+    function onAttachmentsCancel(e, id) {
+        enableSendButton(id, false);
+    }
+
+    function onAttachmentsUpload(e, id) {
+
+    }
+
+    function onAttachmentsRemove(e, id) {
+        enableSendButton(id, false);
+    }
+
+    function onAttachmentsUploadSuccess(e, id) {
+        enableSendButton(id, false);
+    }
+
+    function onAttachmentsUploadError(e, id) {
+        enableSendButton(id, false);
+    }
+
+    function enableSendButton(id, disabled) {
+
+        $("#Send" + id).prop('disabled', disabled);
+        if (disabled) {
+            $("#Send" + id).attr("title", "Upload attachment after selecting.");
+        } else {
+            $("#Send" + id).attr("title", "Click to send.");
+        }
+    }
+
+    function addExtensionClass(extension) {
+        switch (extension) {
+            case '.jpg':
+            case '.JPG':
+            case '.img':
+            case '.png':
+            case '.gif':
+                return "jpg.png";
+            case '.doc':
+            case '.docx':
+                return "doc.png";
+            case '.xls':
+            case '.xlsx':
+                return "xls.png";
+            case '.pdf':
+                return "pdf.png";
+            case '.zip':
+            case '.rar':
+                return "zip.png";
+            default:
+                return "default.png";
+        }
+    }
+
+    function appendAcknowledgement(EtoMailId, WorkItemId, recipients) {
+        var response = ajaxServerInteraction("GET", "/api/Hierarchy/GetAcknowledgement", { "CurrentLoggedInUserId": currentLoggedInUserId, "EtoMailId": EtoMailId, "WorkItemId": WorkItemId, "Recipients": recipients });
+
+        var notification = $("#notification").data("kendoNotification");
+
+        if (response.IsSuccess) {
+
+            var BodyEditor = $("#UniqueBodyClassName" + EtoMailId).data("kendoEditor")
+            var ReplyEditorValue = "<div>" + response.Object + "</div>" + BodyEditor.value();
+            BodyEditor.value(ReplyEditorValue);
+
+            notification.success(response.ResponseMessage);
+        }
+        else if (response.IsWarning) {
+            notification.error(response.ResponseMessage);
+        }
+        else if (response.IsError) {
+            alert(response.ResponseMessage);
+        }
+    }
+
+    function sendMail(id, subject, workItemId, recipients) {
+        var Name = $("#Subject" + id)[0].innerHTML;
+        var EmailType = "Sending";
+        var Sender = recipients;
+        var Recipient = $("#Recipient" + id)[0].value;
+        var CarbonCopy = $("#CarbonCopy" + id)[0].value;
+        var BlindCarbonCopy = $("#BlindCarbonCopy" + id)[0].value;
+        var MailBody = $("#UniqueBodyClassName" + id).data("kendoEditor").value();
+
+        if (Recipient != "" && Recipient != null) {
+            var UploadAttachements = $("#UploadAttachements" + id).data("kendoUpload").getFiles();
+            var Attachments = new Array();
+            for (var i = 0; i < UploadAttachements.length; i++) {
+                var Attachment = {
+                    Name: UploadAttachements[i].name,
+                    FileSize: UploadAttachements[i].size,
+                    FileType: UploadAttachements[i].extension
+                }
+
+                Attachments.push(Attachment);
+            }
+
+            var etoMail = {
+                Name: Name,
+                EmailType: EmailType,
+                Sender: Sender,
+                Recipient: Recipient,
+                CarbonCopy: CarbonCopy,
+                BlindCarbonCopy: BlindCarbonCopy,
+                MailBody: MailBody,
+                Attachments: Attachments,
+                WorkItem:
+                    {
+                        Id: workItemId
+                    }
+            };
+
+            var response = ajaxServerInteraction("POST", "/api/MailService/SendMail", { "CurrentLoggedInUserId": currentLoggedInUserId, "EtoMail": JSON.stringify(etoMail) });
+
+            var notification = $("#notification").data("kendoNotification");
+
+            if (response.IsSuccess) {
+                notification.success(response.ResponseMessage);
+            }
+            else if (response.IsWarning) {
+                notification.error(response.ResponseMessage);
+            }
+            else if (response.IsError) {
+                alert(response.ResponseMessage);
+            }
+
+            var MainBodyWindow = $("#MainBody" + id).data("kendoWindow");
+            if (MainBodyWindow != undefined) {
+                MainBodyWindow.close();
+            }
+            onFormAndSubject(workItemId);
+        } else {
+            alert("Atleast one recipient is expected.");
+        }
+    }
+
+    function cancelReply(id, workItemId) {
+        var MainBodyWindow = $("#MainBody" + id).data("kendoWindow");
+        if (MainBodyWindow != undefined) {
+            MainBodyWindow.close();
+        }
+        onFormAndSubject(workItemId);
+    }
+</script>
+
+<script>
+    function replyAll(id, subject, workItemId, workItemExternalUId) {
+
+        var Sender = $("#Sender" + id);
+        Sender.fadeOut("fast");
+        var Recipient = $("#Recipient" + id);
+        Recipient[0].innerHTML = Sender[0].innerHTML;
+
+        Recipient.removeAttr("disabled");
+
+        var regexPattern = /\bETO[0-9]{1,}$/g;
+
+        var replySubject = $("#Subject" + id);
+
+        if (regexPattern.test(replySubject[0].innerHTML)) {
+            replySubject[0].innerHTML.replace(regexPattern, workItemExternalUId);
+        } else {
+            replySubject[0].innerHTML = subject + " - " + workItemExternalUId;
+        }
+
+        $("#CarbonCopy" + id).removeAttr("disabled");
+        $("#BlindCarbonCopyDiv").fadeIn();
+        $("#BlindCarbonCopy" + id)[0].value = "";
+        $("#BlindCarbonCopy" + id).removeAttr("disabled");
+        var BodyEditor = $("#UniqueBodyClassName" + id).data("kendoEditor")
+        $(BodyEditor.body).attr('contenteditable', true);
+        var userSignature = "@Html.Raw(HttpUtility.HtmlDecode(User.Identity.GetUserSignature()))";
+        var ReplyEditorValue = "<br/><div>" + userSignature + " </div> <p><hr style='margin:3px;'></p><p></p>" + BodyEditor.value();
+
+        BodyEditor.value(ReplyEditorValue);
+
+        $("#Acknowledge" + id).fadeIn();
+
+        $("#Cancel").fadeIn();
+
+        $("#Attachments" + id).fadeOut("fast");
+        $("#UploadAttachmentsDiv" + id).fadeIn();
+
+        uploadAttachments(id, replySubject[0].innerHTML);
+
+        $("#Reply" + id).fadeOut("fast");
+        $("#Send" + id).fadeIn();
+    }
+</script>
+
+<script>
+    function onDownloadAttachment(Recipient, Sender, Attachment) {
+        window.location = '@Url.Action("DownloadAttachment", "EtoAuthenticated")?CurrentLoggedInUserId=' + currentLoggedInUserId + '&Recipient=' + Recipient + '&Sender=' + Sender + '&StringifiedAttachment=' + Attachment;
+    }
+</script>

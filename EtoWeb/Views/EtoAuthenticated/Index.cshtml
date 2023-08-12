@@ -1,0 +1,428 @@
+﻿@using DataModels;
+@using Newtonsoft.Json;
+@{
+    ViewBag.Title = "Welcome to Eto";
+}
+<style>
+    .blank {
+        background-color: beige;
+        color: black;
+    }
+
+    .black {
+        background-color: rgba(12, 10, 23, 0.88);
+        color: white;
+    }
+
+    .red {
+        background-color: rgba(191,0,0,1);
+        color: white;
+    }
+
+    .yellow {
+        background-color: rgba(223,223,0,1);
+        color: black;
+    }
+
+    .green {
+        background-color: rgb(2, 99, 2);
+        color: white;
+    }
+
+    .white {
+        background-color: white;
+        color: black;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        etoTreeGridSplit();
+        createHierarchyTreeview();
+        createWorkItemGridView();
+
+        $(".k-grid-add").attr("title", "Add new record");
+        $(".k-grid-save-changes").attr("title", "Save changes");
+        $(".k-grid-cancel-changes").attr("title", "Cancel changes");
+        $(".k-grid-delete").attr("title", "Delete record");
+    });
+    function etoTreeGridSplit() {
+        $("#etoTreeGridLayout").kendoSplitter({
+            orientation: "horizontal",
+            panes: [
+                {
+                    collapsed: true,
+                    collapsible: true,
+                    size: "15%"
+                },
+                {
+                    collapsible: false,
+                    size: "85%"
+                }
+            ]
+        });
+    }
+</script>
+
+<script>
+    function createHierarchyTreeview() {
+
+        //var HierarchyTreeViewData = ajaxServerInteraction("GET", "/api/Hierarchy/GetHierarchyForTreeView", {"CurrentLoggedUserId":currentLoggedInUserId, "ParentId":0 }).Object;
+        var ParentId = 0;
+        var HierarchyTreeViewData = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: "/api/Hierarchy/GetHierarchyForTreeView",
+                    dataType: "jsonp",
+                    data:
+                    {
+                        CurrentLoggedUserId: currentLoggedInUserId,
+                        id: 0
+                    }
+                }
+            },
+            schema: {
+                data: "Object",
+                model: {
+                    id: "id",
+                    hasChildren: "hasChildren"
+                }
+            }
+        });
+
+
+        $("#HierarchyTreeView").kendoTreeView({
+            dataSource: HierarchyTreeViewData,
+            dataTextField: "name",
+            checkboxes: {
+                checkChildren: true
+            },
+
+            check: refreshGrid
+        });
+    }
+
+    function refreshGrid() {
+        var WorkItemGridView = $("#WorkItemGridView").data("kendoGrid");
+
+        if (WorkItemGridView != undefined && WorkItemGridView != null) {
+            WorkItemGridView.dataSource.read();
+        }
+    }
+</script>
+
+<script>
+    var FetchMode = "all";
+    //hub.client.notify = function (title, body, icon, data, tag) {
+    //    notifyMe(title, body, icon, data, tag);
+    //};
+
+    function createWorkItemGridView() {
+        var connection = $.connection;
+        var hub = connection.workItemGridHub;
+        var hubStart = connection.hub.start();
+
+        var columns = null;//loadGridPreferences();
+
+        if (columns == "NULL" || columns == null || columns == undefined) {
+            columns = generateGridColumns(1, "WorkItem");
+        }
+
+        $("#WorkItemGridView").kendoGrid({
+            sortable: true,
+            resizable: true,
+            filterable: true,
+            scrollable: true,
+            reorderable: true,
+            columnMenu: {
+                filterable: true,
+                sortable: false
+            },
+            selectable: "multiple, row",
+            pageable: {
+                refresh: true,
+                pageSizes: [20, 30, 40, 50],
+                buttonCount: 5,
+                pageSize: 20,
+                info: true,
+                messages: {
+                    empty: "No data"
+                }
+            },
+            noRecords: true,
+            mobile: true,
+            editable: {
+                mode: "incell",
+                createAt: "top",
+                destroy: false
+            },
+            columns: columns,
+            toolbar: generateGridCommands(0, "WorkItem"),
+            dataSource: {
+                type: "signalr",
+                serverPaging: false,
+                serverSorting: false,
+                serverFiltering: false,
+                autoSync: false,
+                // Handle the push event to display notifications when push updates arrive
+                push: function (e) {
+                    var notification = $("#notification").data("kendoNotification");
+                    notification.success(e.type);
+                    //notifyMe(e.type)
+                },
+                schema: {
+                    model: {
+                        id: "Id",
+                        fields: getGridModelFields("WorkItem")
+                    }
+                },
+                transport: {
+                    parameterMap: function (data, type) {
+                        if (type == "read") {
+                            data.fetchMode = FetchMode;
+
+                            var checkedNodes = [];
+                            var HierarchyTreeView = $("#HierarchyTreeView").data("kendoTreeView");
+                            if (HierarchyTreeView != undefined && HierarchyTreeView != null) {
+                                checkedNodeIds(HierarchyTreeView.dataSource.view(), checkedNodes);
+
+                                data.hierarchyIds = checkedNodes;
+                            }
+                        }
+
+                        return data;
+                    },
+                    signalr: {
+                        promise: hubStart,
+                        hub: hub,
+                        server: {
+                            read: "read",
+                            update: "update",
+                            destroy: "destroy",
+                            create: "create"
+                        },
+                        client: {
+                            read: "read",
+                            update: "update",
+                            destroy: "destroy",
+                            create: "create"
+                        }
+                    }
+                },
+                sort: { field: "CreatedDate", dir: "desc" }
+            },
+            dataBound: function (e) {
+            },
+            detailTemplate: "<div class='gridDetailTemplate' id='EmailListView#=Id#'>" +
+                "<div id='FormAndSubjectListView#=Id#'></div>" +
+                "<div id='MainBodyDetailView#=Id#'>" +
+                "" +
+                "</div>" +
+                "</div>",
+            detailExpand: WorkItemGridDetailTemplateExpand
+        });
+
+        CalculateColorCodeAtInterval(120000);
+    }
+
+    function CalculateColorCodeAtInterval(milliseconds) {
+        window.setInterval(function () {
+            CalculateColorCode();
+        }, milliseconds);
+    }
+
+    function CalculateColorCode() {
+
+        var WorkItemGrid = $("#WorkItemGridView").data("kendoGrid");
+        var WorkItems = WorkItemGrid.dataSource.data();
+
+        for (var i = 0; i < WorkItems.length; i++) {
+            if (WorkItems[i].Status != null && (WorkItems[i].Status.Id != 1 || WorkItems[i].Status.Id != 2)) {
+
+                var Color = "blank";
+
+                var Today = new Date();
+                var CurrentReviewDate = new Date(WorkItems[i].CurrentReviewDate);
+                var OneThirdCurrentReviewDate = new Date(WorkItems[i].CurrentReviewDate);
+                OneThirdCurrentReviewDate.setMinutes(CurrentReviewDate.getMinutes() - ((WorkItems[i].Duration) + (WorkItems[i].Duration * 0.33)));
+
+                var OneSixthCurrentReviewDate = new Date(WorkItems[i].CurrentReviewDate);
+                OneSixthCurrentReviewDate.setMinutes(CurrentReviewDate.getMinutes() - ((WorkItems[i].Duration) + (WorkItems[i].Duration * 0.66)));
+
+                if (WorkItems[i].CurrentReviewDate != null) {
+                    if (Today >= CurrentReviewDate) {
+                        Color = "black";
+                    }
+                    else if (Today >= OneThirdCurrentReviewDate) {
+                        Color = "red";
+                    }
+                    else if (Today >= OneSixthCurrentReviewDate) {
+                        Color = "yellow";
+                    }
+                    else {
+                        Color = "green";
+                    }
+                }
+
+                WorkItems[i].ColorName = Color;
+            }
+        }
+
+        WorkItemGrid.dataSource.data(WorkItems);
+        WorkItemGrid.refresh();
+    }
+
+    function WorkItemGridDetailTemplateExpand(e) {
+        detailRow = e.detailRow;
+        parentRow = e.masterRow;
+        var parentCurrentDataItem = e.sender.dataItem(parentRow);
+        var id = parentCurrentDataItem.Id;
+
+        generateWebMailView(id);
+        generateEmailListView(parentCurrentDataItem);
+    }
+
+    function assignedToMeItems() {
+
+        FetchMode = "mine";
+
+        var WorkItemGridView = $("#WorkItemGridView").data("kendoGrid");
+
+        if (WorkItemGridView != undefined && WorkItemGridView != null) {
+            WorkItemGridView.dataSource.sort({ field: "ColorCode", dir: "asc" })
+            WorkItemGridView.dataSource.read();
+        }
+        //WorkItemGridView.refresh();
+    }
+
+    function allItems() {
+        FetchMode = "all";
+
+        var WorkItemGridView = $("#WorkItemGridView").data("kendoGrid");
+        if (WorkItemGridView != undefined && WorkItemGridView != null) {
+            WorkItemGridView.dataSource.sort({ field: "CreatedDate", dir: "desc" })
+            WorkItemGridView.dataSource.read();
+        }
+        //WorkItemGridView.refresh();
+    }
+
+    function readResolvedItems() {
+        FetchMode = "resolved";
+
+        var WorkItemGridView = $("#WorkItemGridView").data("kendoGrid");
+
+        if (WorkItemGridView != undefined && WorkItemGridView != null) {
+            WorkItemGridView.dataSource.sort({ field: "UpdatedOn", dir: "desc" })
+            WorkItemGridView.dataSource.read();
+        }
+        //WorkItemGridView.refresh();
+
+    }
+
+    function readClosedItems() {
+        FetchMode = "closed";
+
+        var WorkItemGridView = $("#WorkItemGridView").data("kendoGrid");
+
+        if (WorkItemGridView != undefined && WorkItemGridView != null) {
+            WorkItemGridView.dataSource.sort({ field: "UpdatedOn", dir: "desc" })
+            WorkItemGridView.dataSource.read();
+        }
+        //WorkItemGridView.refresh();
+    }
+
+    function acknowledgeMail(id) {
+
+    }
+
+    function sendAcknowledgement() {
+
+    }
+
+    function saveGridPreferences() {
+
+        var WorkItemGridView = $("#WorkItemGridView").data("kendoGrid");
+        var workItemGridColumnState = JSON.stringify(WorkItemGridView.columns);
+
+        var response = ajaxServerInteraction("POST", "/api/WorkItem/SaveWorkItemGridColumnState", { "CurrentLoggedInUserId": currentLoggedInUserId, "WorkItemGridColumnState": workItemGridColumnState });
+
+        var notification = $("#notification").data("kendoNotification");
+
+        if (response.IsSuccess) {
+            notification.success(response.ResponseMessage);
+        }
+        else if (response.IsWarning) {
+            notification.error(response.ResponseMessage);
+        }
+        else if (response.IsError) {
+            alert(response.ResponseMessage);
+        }
+
+    }
+
+    function loadGridPreferences() {
+
+        var response = ajaxServerInteraction("GET", "/api/WorkItem/LoadWorkItemGridColumnState", { "CurrentLoggedInUserId": currentLoggedInUserId });
+
+        var notification = $("#notification").data("kendoNotification");
+        var workItemGridColumnState = "NULL";
+        if (response.IsSuccess) {
+            workItemGridColumnState = response.Object;
+        }
+        else if (response.IsWarning) {
+            notification.error(response.ResponseMessage);
+        }
+        else if (response.IsError) {
+            alert(response.ResponseMessage);
+        }
+
+        return JSON.parse(workItemGridColumnState);
+    }
+
+    function copyExternalUIdToClipBoard(externalUId) {
+        window.prompt("Copy to clipboard, Enter", externalUId);
+    }
+
+    function colorCellByPriorityColor(colorCode) {
+        var cssClass = "black";
+        switch (colorCode) {
+            case 0:
+                cssClass = "blank";
+                break;
+            case 1:
+                cssClass = "black";
+                break;
+            case 2:
+                cssClass = "red";
+                break;
+            case 3:
+                cssClass = "yellow";
+                break;
+            case 4:
+                cssClass = "green";
+                break;
+            case 5:
+                cssClass = "white";
+                break;
+        }
+        return cssClass;
+    }
+</script>
+
+<div id="etoTreeGridLayout" style="height:87vh;">
+    <div id="left-pane">
+        <div class="pane-content">
+            <div id="HierarchyTreeView" style="font-weight:bold;">
+            </div>
+        </div>
+    </div>
+    <div id="right-pane">
+        @*style="background-color:rgba(63, 81, 181, 0.15);"*@
+        <div class="pane-content">
+            <div id="WorkItemGridView" class="EtoGrid">
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("~/Views/EtoAuthenticated/_email.cshtml")
+@Html.Partial("~/Views/EtoAuthenticated/_report.cshtml")
